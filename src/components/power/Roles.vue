@@ -7,7 +7,7 @@
       <el-breadcrumb-item>角色列表</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <!-- k卡片视图 -->
+    <!-- 卡片视图 -->
     <el-card>
       <el-button type="primary" @click="addDialogVisible = true">添加角色</el-button>
     </el-card>
