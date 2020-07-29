@@ -1,12 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>角色列表</el-breadcrumb-item>
-    </el-breadcrumb>
-
+    <breadcrumb title1="权限管理" title2="角色列表"></breadcrumb>
     <!-- 卡片视图 -->
     <el-card>
       <el-button type="primary" @click="addDialogVisible = true">添加角色</el-button>
@@ -140,9 +135,7 @@ export default {
   },
   methods: {
     async getRolesList () {
-      const { data: res } = await this.$http.get('roles')
-      if (res.meta.status !== 200) return this.$message.error('获取角色列表失败')
-      this.rolesList = res.data
+      this.rolesList = await this.$PM.httpGet('roles', {}, 200)
     },
     // 根据选择修改用户的id去请求该用户的数据，并储存该数据
     async reviseDialog (id) {

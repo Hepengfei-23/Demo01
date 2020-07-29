@@ -76,10 +76,7 @@ export default {
     },
     // 获取所有的菜单
     async getMenuList () {
-      const { data: res } = await this.$http.get('menus')
-      if (res.meta.status !== 200) return this.$message.error('res.meta.msg')
-      // 若status等于200，即请求成功，将获取到的res数据赋值给组件data属性中的menuList
-      this.menuList = res.data
+      this.menuList = await this.$PM.httpGet('menus', {}, 200)
     },
     // 侧边栏的折叠和展开
     toggleCollapse () {

@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>权限列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <breadcrumb title1="权限管理" title2="权限列表"></breadcrumb>
     <el-card>
       <el-table :data="rightList" border stripe>
         <el-table-column label="序号" type="index"></el-table-column>
@@ -34,10 +30,8 @@ export default {
     this.getRightList()
   },
   methods: {
-    async  getRightList () {
-      const { data: res } = await this.$http.get('rights/list')
-      if (res.meta.status !== 200) return this.$message.error('获取权限列表成功')
-      this.rightList = res.data
+    async getRightList () {
+      this.rightList = await this.$PM.httpGet('rights/list', {}, 200)
     }
   }
 }

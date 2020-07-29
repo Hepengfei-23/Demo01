@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品分类</el-breadcrumb-item>
-    </el-breadcrumb>
+    <breadcrumb title1="商品管理" title2="商品分类"></breadcrumb>
     <!-- 卡片视图 -->
     <el-card>
       <el-button type="primary" @click="showAddCateDialog">添加分类</el-button>
@@ -118,6 +114,7 @@ export default {
       parentCateList: [],
       cascaderProps: {
         expandTrigger: 'hover',
+        checkStrictly: 'true',
         value: 'cat_id',
         label: 'cat_name',
         children: 'children'

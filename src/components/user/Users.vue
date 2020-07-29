@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <breadcrumb title1="用户管理" title2="用户列表"></breadcrumb>
     <!-- 卡片视图 -->
     <el-card class="box-card">
       <!-- 搜索与添加区域 -->
@@ -147,6 +143,7 @@ export default {
         // 当前每页显示多少条数据
         pagesize: 2
       },
+      responseData: {},
       userlist: [],
       total: 0,
       // 角色列表
@@ -208,10 +205,9 @@ export default {
   methods: {
     // 向服务器请求用户数据
     async getUserList () {
-      const { data: res } = await this.$http.get('users', { params: this.queryInfo })
-      if (res.meta.status !== 200) return this.$message.error('获取用户列表失败')
-      this.userlist = res.data.users
-      this.total = res.data.total
+      this.responseData = await this.$PM.httpGet('users', { params: this.queryInfo }, 200)
+      this.userlist = this.responseData.users
+      this.total = this.responseData.total
     },
     // 监听pagesize 改变是事件
     handleSizeChange (newSize) {
